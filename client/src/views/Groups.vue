@@ -12,10 +12,10 @@ import {GroupViewModel} from '@/components/groups/models';
   }
 })
 export default class Groups extends Vue {
-  private currentId: number = 3;
+  private currentId: number = 4;
   private groups: GroupViewModel[] = [
-      {id: 1, name: 'Sample Group 1'}, {id: 2, name: 'Sample Group 2'},
-      {id: 3, name: 'Sample Group 3'}, {id: 4, name: 'Sample Group 4'}
+      {id: ++this.currentId, name: 'Sample Group 1'}, {id: ++this.currentId, name: 'Sample Group 2'},
+      {id: ++this.currentId, name: 'Sample Group 3'}, {id: ++this.currentId, name: 'Sample Group 4'}
   ];
   private onUpdate(group: GroupViewModel): void {
     const index = this.groups.findIndex(g => g.id === group.id);
