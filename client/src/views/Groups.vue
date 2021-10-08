@@ -17,7 +17,7 @@ export default class Groups extends Vue {
   }
 
   private get groups(): GroupViewModel[] {
-    return this.$store.state.groups;
+    return this.$store.state.groups.groups;
   }
   private onUpdate(group: GroupViewModel): void {
     this.$store.dispatch('update', group)
