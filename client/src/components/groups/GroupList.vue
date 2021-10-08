@@ -20,12 +20,10 @@ export default class GroupList extends Vue {
   @Prop() private groups!: GroupViewModel[];
 
   private onUpdate(group: GroupViewModel): void {
-    console.log(group);
     this.$emit('update', group);
   }
 
   private onRemove(groupId: number): void {
-    console.log(groupId);
     this.$emit('remove', groupId);
   }
 
