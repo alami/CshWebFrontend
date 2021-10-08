@@ -7,12 +7,12 @@ Vue.use(Vuex)
 let currentId: number = 0
 const options: StoreOptions<RootState> = {
   state: {
-    groups:[
-      {id: ++currentId, name: 'Sample Group 111'}, {id: ++currentId, name: 'Sample Group 222'},
-      {id: ++currentId, name: 'Sample Group 333'}, {id: ++currentId, name: 'Sample Group 444'}
-    ]
+    groups:[]
   },
   mutations: {
+    setGroups (state: RootState,groups: Group[]):void {
+      state.groups = [...groups]
+    },
     add (state: RootState,group: Group):void {
       group.id = ++currentId;
       state.groups = [...state.groups, group];
@@ -26,6 +26,14 @@ const options: StoreOptions<RootState> = {
     }
   },
   actions: {
+    loadGroups({commit}): void {
+      //TODO: fetch groups from the api
+      const groups = [
+        {id: ++currentId, name: 'Sample Group 111'}, {id: ++currentId, name: 'Sample Group 222'},
+        {id: ++currentId, name: 'Sample Group 333'}, {id: ++currentId, name: 'Sample Group 444'}
+      ]
+      commit('setGroups', groups)
+    },
     add (context:ActionContext<RootState, RootState>, group: Group) : void {
       //TODO: make the api request before commiting to the store
       context.commit('add',group)

@@ -12,7 +12,10 @@ import {GroupViewModel} from '@/components/groups/models';
   }
 })
 export default class Groups extends Vue {
-  //private groups: GroupViewModel[] = this.$store.state.groups;
+  public mounted(): void {
+    this.$store.dispatch('loadGroups')
+  }
+
   private get groups(): GroupViewModel[] {
     return this.$store.state.groups;
   }
