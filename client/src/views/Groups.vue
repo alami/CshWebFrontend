@@ -13,22 +13,22 @@ import {GroupViewModel} from '@/components/groups/models';
 })
 export default class Groups extends Vue {
   public mounted(): void {
-    this.$store.dispatch('loadGroups')
+    this.$store.dispatch('groups/loadGroups')
   }
 
   private get groups(): GroupViewModel[] {
     return this.$store.state.groups.groups;
   }
   private onUpdate(group: GroupViewModel): void {
-    this.$store.dispatch('update', group)
+    this.$store.dispatch('groups/update', group)
   }
 
   private onRemove(groupId: number): void {
-    this.$store.dispatch('remove', groupId)
+    this.$store.dispatch('groups/remove', groupId)
   }
 
   private onAdd(group: GroupViewModel): void {
-    this.$store.dispatch('add', group)
+    this.$store.dispatch('groups/add', group)
   }
 }
 </script>

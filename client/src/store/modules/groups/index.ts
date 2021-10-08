@@ -5,7 +5,7 @@ import {actions} from "@/store/modules/groups/actions";
 import {mutations} from "@/store/modules/groups/mutations";
 
 export const groups: Module<GroupsState, RootState> = {
-    namespaced: false,
+    namespaced: true,
     actions,
     mutations,
     state: {
