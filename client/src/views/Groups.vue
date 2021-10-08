@@ -12,20 +12,20 @@ import {GroupViewModel} from '@/components/groups/models';
   }
 })
 export default class Groups extends Vue {
-  private currentId: number = 4;
-  private groups: GroupViewModel[] = this.$store.state.groups;
+  //private groups: GroupViewModel[] = this.$store.state.groups;
+  private get groups(): GroupViewModel[] {
+    return this.$store.state.groups;
+  }
   private onUpdate(group: GroupViewModel): void {
-    const index = this.groups.findIndex(g => g.id === group.id);
-    this.groups = [...this.groups.slice(0, index), group, ...this.groups.slice(index + 1, this.groups.length)];
+    this.$store.commit('update', group)
   }
 
   private onRemove(groupId: number): void {
-    this.groups = this.groups.filter(g => g.id !== groupId);
+    this.$store.commit('remove', groupId)
   }
 
   private onAdd(group: GroupViewModel): void {
-    group.id = ++this.currentId;
-    this.groups = [...this.groups, group];
+    this.$store.commit('add', group)
   }
 }
 </script>
