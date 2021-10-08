@@ -17,15 +17,15 @@ export default class Groups extends Vue {
     return this.$store.state.groups;
   }
   private onUpdate(group: GroupViewModel): void {
-    this.$store.commit('update', group)
+    this.$store.dispatch('update', group)
   }
 
   private onRemove(groupId: number): void {
-    this.$store.commit('remove', groupId)
+    this.$store.dispatch('remove', groupId)
   }
 
   private onAdd(group: GroupViewModel): void {
-    this.$store.commit('add', group)
+    this.$store.dispatch('add', group)
   }
 }
 </script>
