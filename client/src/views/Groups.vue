@@ -5,6 +5,7 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import GroupList from '@/components/groups/GroupList.vue';
 import {GroupViewModel} from '@/components/groups/models';
+import {types} from "@/store/modules/groups/actions";
 
 @Component({
   components: {
@@ -13,22 +14,22 @@ import {GroupViewModel} from '@/components/groups/models';
 })
 export default class Groups extends Vue {
   public mounted(): void {
-    this.$store.dispatch('groups/loadGroups')
+    this.$store.dispatch(types.LOAD_GROUPS)
   }
 
   private get groups(): GroupViewModel[] {
     return this.$store.state.groups.groups;
   }
   private onUpdate(group: GroupViewModel): void {
-    this.$store.dispatch('groups/update', group)
+    this.$store.dispatch(types.UPDATE_GROUP, group)
   }
 
   private onRemove(groupId: number): void {
-    this.$store.dispatch('groups/remove', groupId)
+    this.$store.dispatch(types.REMOVE_GROUP, groupId)
   }
 
   private onAdd(group: GroupViewModel): void {
-    this.$store.dispatch('groups/add', group)
+    this.$store.dispatch(types.ADD_GROUP, group)
   }
 }
 </script>

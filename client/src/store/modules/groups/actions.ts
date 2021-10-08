@@ -2,6 +2,13 @@ import { ActionContext, ActionTree } from "vuex";
 import { RootState } from "@/store/state";
 import { GroupsState, Group } from "@/store/modules/groups/state";
 
+export const types = {
+    LOAD_GROUPS: 'groups/loadGroups',
+    ADD_GROUP: 'groups/add',
+    UPDATE_GROUP: 'groups/update',
+    REMOVE_GROUP: 'groups/remove'
+};
+
 export const actions: ActionTree<GroupsState, RootState> = {
     loadGroups({commit}): void {
         //TODO: fetch groups from the api
