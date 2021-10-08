@@ -1,10 +1,15 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, {StoreOptions} from 'vuex'
+import { RootState } from './state';
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const options: StoreOptions<RootState> = {
   state: {
+    groups:[
+      {id: 1, name: 'Sample Group 1'}, {id: 2, name: 'Sample Group 2'},
+      {id: 3, name: 'Sample Group 3'}, {id: 4, name: 'Sample Group 4'}
+    ]
   },
   mutations: {
   },
@@ -12,4 +17,6 @@ export default new Vuex.Store({
   },
   modules: {
   }
-})
+}
+export default new Vuex.Store(options);
+
