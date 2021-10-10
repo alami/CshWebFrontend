@@ -1,7 +1,7 @@
 import { ActionContext, ActionTree } from "vuex";
 import { RootState } from "@/store/state";
 import { GroupsState, Group } from "@/store/modules/groups/state";
-import { GroupsService } from "@/data/groups/groups-service";
+import {GroupsEndpoint} from "@/data/groups/groups-endpoint";
 
 export const types = {
     LOAD_GROUPS: 'groups/loadGroups',
@@ -10,21 +10,25 @@ export const types = {
     REMOVE_GROUP: 'groups/remove'
 };
 
-const groupsService = new GroupsService();
+//const groupsService = new GroupsService();
 
-export const actions: ActionTree<GroupsState, RootState> = {
+export const makeActions = (groupsEndpoint: GroupsEndpoint): ActionTree<GroupsState, RootState> => {
+    return {
     async loadGroups({commit}): Promise<void> {
-        const groups = await groupsService.getAll();
+        const groups = await groupsEndpoint.getAll();
         commit('setGroups', groups)
     },
-    add (context:ActionContext<RootState, RootState>, group: Group) : void {
-        //TODO: make the api request before commiting to the store
-        context.commit('add',group)
-    },
-    update ({commit}, group:Group): void {    //TODO:...
-        commit('update',group)
-    },
-    remove ({commit}, groupId:number): void { //TODO:...
-        commit('remove',groupId)
-    },
-}
+        async add({ commit }, group: Group): Promise<void> {
+            const addedGroup = await groupsEndpoint.add(group);
+            commit('add', addedGroup);
+        },
+        async update({ commit }, group: Group): Promise<void> {
+            const updatedGroup = await groupsEndpoint.update(group);
+            commit('update', updatedGroup);
+        },
+        async remove({ commit }, groupId: number): Promise<void> {
+            await groupsEndpoint.remove(groupId);
+            commit('remove', groupId);
+        }
+    };
+};
